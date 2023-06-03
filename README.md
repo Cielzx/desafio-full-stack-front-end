@@ -10,8 +10,10 @@ npm run dev
 ```
 
 ## NOTE
+ ```bash
+PLEASE RUN THE BACK END WITH YARN RUN DEV TO THIS APP WORKS
+```
 
-PLEASE RUN THE BACK END WITH `YARN RUN DEV TO THIS APP WORKS`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
