@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server with:
 
 ```bash
 npm run dev
@@ -10,8 +10,10 @@ npm run dev
 ```
 
 ## NOTE
+ ```bash
+PLEASE FIRST RUN THE BACK END WITH YARN RUN DEV TO THIS APP WORKS
+```
 
-PLEASE RUN THE BACK END WITH `YARN RUN DEV TO THIS APP WORKS`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
