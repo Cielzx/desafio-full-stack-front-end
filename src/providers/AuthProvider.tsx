@@ -4,8 +4,9 @@ import { RegisterData } from "@/components/Register Form/validator";
 import api from "@/services/api";
 import { parseCookies, setCookie } from "nookies";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { ContactContext } from "./ContactsProvider";
 
 interface AuthProviderProps {
   children: React.ReactNode;
@@ -21,21 +22,8 @@ export const AuthContext = createContext<AuthValue>({} as AuthValue);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [loading, setLoading] = useState(true);
-
+  const { GetAccContacts } = useContext(ContactContext);
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const cookies = parseCookies();
-  //   const token = cookies.userToken;
-
-  //   if (!token) {
-  //     return;
-  //   }
-
-  //   api.defaults.headers.common.authorization = `Bearer ${token}`;
-
-  //   setLoading(false);
-  // });
 
   const RegisterFunction = async (data: RegisterData) => {
     try {
@@ -58,14 +46,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
       setCookie(null, "user.Token", token, {
-        maxAge: 60 * 30,
+        maxAge: 60 * 1500,
         path: "/",
       });
       toast.success("Logado com sucesso!");
 
       setTimeout(() => {
         router.push("/dashboard");
-      }, 3000);
+      }, 2000);
     } catch (error) {
       toast.error(`Credenciais invalidas`);
     }

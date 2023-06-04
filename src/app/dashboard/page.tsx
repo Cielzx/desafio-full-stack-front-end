@@ -12,18 +12,8 @@ const DashPage: React.FC = () => {
 
   const router = useRouter();
 
-  const cookies = parseCookies();
-
-  const handleToken = () => {
-    const token = cookies["user.Token"];
-
-    if (!token) {
-      return router.push("/login");
-    }
-  };
-
   setContact(user?.contacts);
-  handleToken();
+
   useEffect(() => {
     GetAccContacts();
   }, []);

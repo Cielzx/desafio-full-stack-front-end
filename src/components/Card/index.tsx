@@ -14,7 +14,7 @@ import ModalForm from "../Modal/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "../Register Form/validator";
-import Input from "../Input";
+import { IoSad } from "react-icons/io5";
 import ModalDashDelete from "../Modal/modalDelete";
 
 const Card = () => {
@@ -44,8 +44,16 @@ const Card = () => {
     <>
       <ul className="flex flex-col w-2/3 gap-1 p-10">
         <AnimatePresence>
-          {contacts ? (
-            contacts.map((el) => (
+          {contacts?.length == 0 ? (
+            <div className="text-4xl flex flex-col h-80 justify-center items-center  gap-4">
+              <p>Você ainda não possui nenhum contato.</p>
+              <IoSad className="text-9xl fill-yellow-300" />
+              <p className="text-3xl">
+                Por favor adicione seu contato no botão acima
+              </p>
+            </div>
+          ) : (
+            contacts?.map((el) => (
               <motion.li
                 initial={{ x: -100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -100,8 +108,6 @@ const Card = () => {
                 </div>
               </motion.li>
             ))
-          ) : (
-            <div>Você ainda não possui nenhum contato.</div>
           )}
         </AnimatePresence>
 

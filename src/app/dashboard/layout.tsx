@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { ContactContext } from "@/providers/ContactsProvider";
 import { ToastContainer } from "react-toastify";
 import Dropdown from "@/components/DropDown/dropdown";
+import { parseCookies } from "nookies";
 
 interface LayoutChildren {
   children: ReactNode;
@@ -11,6 +12,18 @@ interface LayoutChildren {
 
 const LayoutDashboard = ({ children }: LayoutChildren) => {
   const router = useRouter();
+
+  const cookies = parseCookies();
+
+  const handleToken = () => {
+    const token = cookies["user.Token"];
+
+    if (!token) {
+      return router.push("/login");
+    }
+  };
+
+  handleToken();
 
   const grootGif =
     "https://media1.giphy.com/media/3o7aDcrsww5Ybp18hq/giphy.gif?cid=ecf05e47wxsxqtgz13upbhp328xnpl751oset25dxjqnu6w8&ep=v1_gifs_search&rid=giphy.gif&ct=g";

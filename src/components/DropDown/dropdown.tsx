@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { IoIosArrowDropleft } from "react-icons/io";
+import { IoIosArrowDropleft, IoIosArrowDropup } from "react-icons/io";
 import { IoIosArrowDropdown } from "react-icons/io";
 import { Button, position } from "@chakra-ui/react";
 import { ContactContext } from "@/providers/ContactsProvider";
+import { parseCookies } from "nookies";
 
 const Dropdown = () => {
   const router = useRouter();
@@ -21,13 +22,20 @@ const Dropdown = () => {
     setIsclicked(!clicked);
   };
 
+  const cookies = parseCookies();
+  const token = cookies["user.Token"];
+
   const handleLogout = () => {
-    localStorage.clear();
+    const deleteCookie = (cookie: string) => {
+      document.cookie = `${cookie}`;
+    };
+
+    deleteCookie(token);
     return router.push("/login");
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", zIndex: "1" }}>
       <motion.button
         animate={{ rotateX: clicked ? 180 : 0 }}
         transition={{ duration: 0.3 }}
@@ -37,7 +45,7 @@ const Dropdown = () => {
           handleButtoClick();
         }}
       >
-        {clicked ? <IoIosArrowDropdown /> : <IoIosArrowDropleft />}
+        {clicked ? <IoIosArrowDropdown /> : <IoIosArrowDropdown />}
       </motion.button>
 
       <AnimatePresence>
